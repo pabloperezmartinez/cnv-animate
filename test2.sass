@@ -1,0 +1,57 @@
+$size: 800px
+$border: $size / 10
+$bck: #0D0D0F
+
+=perspective($p, $origin-x, $origin-y)
+  -webkit-perspective: $p
+  -webkit-perspective-origin: $origin-x $origin-y
+  perspective: $p
+  perspective-origin: $origin-x $origin-y
+
+=rotateX($deg)
+  -webkit-transform: rotateX($deg)
+  transform: rotateX($deg)
+  
+@keyframes tilt
+  95%
+    +perspective($size/3, 50%, 50%)
+  100%
+    +perspective($size/3, 50%, 50%)
+  
+body
+  margin: 0
+  padding: 0
+  background: $bck
+  
+.border
+  position: fixed
+  width: $size - ($border * 2)
+  height: $size - ($border * 2.5)
+  left: 50%
+  margin-left: $size * -0.5
+  margin-top: $border * -2
+  border-top: $border * 2.5 solid $bck
+  border-left: $border solid $bck
+  border-right: $border solid $bck
+  z-index: 5
+
+.spacebox
+  position: fixed
+  width: $size
+  height: $size
+  left: 50%
+  margin-left: $size * -0.5
+  margin-top: $border * -2.5
+  overflow: hidden
+  +perspective($size * 4, 50%, 50%)
+  animation: tilt 10s ease-out infinite
+  animation-direction: alternate
+  
+.space
+  height: $size
+  width: $size
+  background-image: url('https://images.unsplash.com/photo-1504333638930-c8787321eee0?dpr=1&auto=compress,format&fit=crop&w=1950&h=&q=80&cs=tinysrgb&crop=')
+  background-size: cover
+  background-position: center top
+  background-repeat: no-repeat
+  +rotateX(20deg)
